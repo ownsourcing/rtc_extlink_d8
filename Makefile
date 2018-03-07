@@ -44,8 +44,8 @@ cleanup:
 
 ## If syncing files directly into a Tugboat Preview
 # partial success; run just the previously-failed steps
-# tugboat-init: drupalconfig build cleanup
-tugboat-init: packages createdb drupalconfig importdb importfiles build cleanup
+tugboat-init: drupalconfig build cleanup
+# tugboat-init: packages createdb drupalconfig importdb importfiles build cleanup
 tugboat-update: importdb importfiles build cleanup
 tugboat-build: build
 
