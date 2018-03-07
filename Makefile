@@ -16,8 +16,8 @@ createdb:
 	mysql -h mysql -u tugboat -ptugboat -e "create database rtc_extlink_d8;"
 
 importdb:
-	scp intme@ime-client.com:tugboat/rtc_extlink_d8.sql.gz /tmp/rtc_extlink_d8.sql.gz
-	zcat /tmp/rtc_extlink_d8.sql.gz | mysql -h mysql -u tugboat -ptugboat rtc_extlink_d8
+	scp intme@ime-client.com:tugboat/rtc_extlink_d8/backup-2018-03-07T04-39-22rtc_extlink_d8.mysql.gz /tmp/backup-2018-03-07T04-39-22rtc_extlink_d8.mysql.gz
+	zcat /tmp/backup-2018-03-07T04-39-22rtc_extlink_d8.mysql.gz | mysql -h mysql -u tugboat -ptugboat rtc_extlink_d8
 
 importfiles:
 	rsync -av --delete intme@ime-client.com:tugboat/rtc_extlink_d8/files/ /var/www/html/sites/default/files/
