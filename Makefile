@@ -5,7 +5,6 @@ packages:
   add-apt-repository -y ppa:ondrej/php
   apt-get update
   apt-get install -y php7.2
-  apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*	apt-get update
 	# following lines from example config
 	apt-get install -y mysql-client rsync wget
 	# Install drush-launcher. This assumes you are using composer to install
@@ -22,7 +21,7 @@ createdb:
 	mysql -h mysql -u tugboat -ptugboat -e "create database rtc_extlink_d8;"
 
 importdb:
-	scp intme@ime-client.com:tugboat/rtc_extlink_d8/backup-2018-03-07T04-39-22rtc_extlink_d8.mysql.gz /tmp/backup-2018-03-07T04-39-22rtc_extlink_d8.mysql.gz
+	scp -P 2222 -o PubkeyAuthentication=yes intme@ime-client.com:tugboat/rtc_extlink_d8/backup-2018-03-07T04-39-22rtc_extlink_d8.mysql.gz /tmp/backup-2018-03-07T04-39-22rtc_extlink_d8.mysql.gz
 	zcat /tmp/backup-2018-03-07T04-39-22rtc_extlink_d8.mysql.gz | mysql -h mysql -u tugboat -ptugboat rtc_extlink_d8
 
 importfiles:
@@ -44,8 +43,10 @@ cleanup:
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ## If syncing files directly into a Tugboat Preview
-tugboat-init: packages createdb drupalconfig importdb importfiles build cleanup
-tugboat-update: importdb importfiles build cleanup
+# partial success; run just the previously-failed steps
+tugboat-init: drupalconfig build cleanup
+# tugboat-init: packages createdb drupalconfig importdb importfiles build cleanup
+# tugboat-update: importdb importfiles build cleanup
 tugboat-build: build
 
 ## If using Stage File Proxy to serve files
