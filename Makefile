@@ -1,10 +1,10 @@
 # config per https://docs.tugboat.qa/examples/drupal8/ 2018-03-02
 packages:
 	# following lines from search that lead to https://docs.tugboat.qa/build-script/examples/install-php72/
-  apt-get install -y python-software-properties software-properties-common
-  add-apt-repository -y ppa:ondrej/php
-  apt-get update
-  apt-get install -y php7.2
+	apt-get install -y python-software-properties software-properties-common
+	add-apt-repository -y ppa:ondrej/php
+	apt-get update
+	apt-get install -y php7.2
 	# following lines from example config
 	apt-get install -y mysql-client rsync wget
 	# Install drush-launcher. This assumes you are using composer to install
